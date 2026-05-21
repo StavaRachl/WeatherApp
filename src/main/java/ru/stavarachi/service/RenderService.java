@@ -10,11 +10,11 @@ public class RenderService {
         String json = HTTPRequest(city, token);
         Weather weather = WeatherMapper.toEntity(json);
 
-        String text = "Город: " + weather.getCity() +
-                "\n Температура: " + weather.getTemperature() +
-                "\n Влажность: " + weather.getHumidity() +
-                "\n Ветер: " + weather.getWindSpeed() +
-                "\n Описание: " + weather.getDescription();
+        String text = "🌆 | Город: " + weather.getCity() +
+                "\n🌡️ | Температура: " + weather.getTemperature() + "℃" +
+                "\n💦 | Влажность: " + weather.getHumidity() + "%" +
+                "\n🌪️ | Ветер: " + weather.getWindSpeed() + "м/с" +
+                "\n🗒️ | Описание: " + weather.getDescription();
 
         return text;
     }

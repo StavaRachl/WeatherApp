@@ -4,9 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.stavarachi.model.Weather;
 
 public class WeatherMapper {
+    private static final Logger logger = LoggerFactory.getLogger(WeatherMapper.class);
     public static Weather toEntity(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -26,9 +29,11 @@ public class WeatherMapper {
 
             return weather;
         } catch (JsonMappingException e) {
-            throw new RuntimeException(e);
+            logger.error("JsonMapping error: ", e);
+            return null;
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            logger.error("JsonProcessing error: ", e);
+            return null;
         }
     }
 }

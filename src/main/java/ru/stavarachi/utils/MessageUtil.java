@@ -1,10 +1,13 @@
 package ru.stavarachi.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class MessageUtil {
+    private final Logger logger = LoggerFactory.getLogger(MessageUtil.class);
     public void sendMessage(TelegramLongPollingBot bot, Long chatId, String text) {
         try {
             SendMessage sendMessage = new SendMessage();
@@ -14,7 +17,7 @@ public class MessageUtil {
 
             bot.execute(sendMessage);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            logger.error("Telegram error: ", e);
         }
     }
 }

@@ -1,5 +1,7 @@
 package ru.stavarachi.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.stavarachi.config.BotConfig;
@@ -7,6 +9,7 @@ import ru.stavarachi.service.RenderService;
 import ru.stavarachi.utils.MessageUtil;
 
 public class CommandHandler {
+    private final Logger logger = LoggerFactory.getLogger(CommandHandler.class);
     BotConfig botConfig = new BotConfig();
     MessageUtil messageUtil = new MessageUtil();
     RenderService renderService = new RenderService();
@@ -26,7 +29,7 @@ public class CommandHandler {
                 messageUtil.sendMessage(bot, chatId, "Привет! Это бот погоды что бы начать введи команду /weather и город на английском например Khabarovsk");
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Error: ", e);
         }
     }
 }
